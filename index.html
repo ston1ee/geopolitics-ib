@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Geopolitics - IB Politics Course</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-brand">🌍 GeoPolIB</div>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="modules/m1-foundations.html">M1</a>
+    <a href="modules/m2-state.html">M2</a>
+    <a href="modules/m3-power.html">M3</a>
+    <a href="modules/m4-conflicts.html">M4</a>
+    <a href="modules/m5-globalactors.html">M5</a>
+    <a href="modules/m6-humanrights.html">M6</a>
+    <a href="modules/m7-development.html">M7</a>
+    <a href="modules/m8-expert.html">M8</a>
+    <a href="games/quiz.html">Quiz</a>
+    <a href="games/map-game.html">Map Game</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-content">
+    <h1>World Geopolitics</h1>
+    <p class="hero-sub">IB Politics &amp; Global Affairs &mdash; From Zero to Expert</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="num">8</span><span class="label">Modules</span></div>
+      <div class="stat"><span class="num">195</span><span class="label">Countries</span></div>
+      <div class="stat"><span class="num">50+</span><span class="label">Conflicts Covered</span></div>
+      <div class="stat"><span class="num">∞</span><span class="label">Knowledge</span></div>
+    </div>
+    <a href="modules/m1-foundations.html" class="btn-start">Start Learning &rarr;</a>
+  </div>
+  <div class="hero-globe" id="globeCanvas"></div>
+</header>
+
+<section class="progress-section">
+  <h2>Your Learning Journey</h2>
+  <div class="progress-track">
+    <div class="prog-step" data-module="1"><span class="step-num">1</span><span class="step-label">Foundations</span></div>
+    <div class="prog-step" data-module="2"><span class="step-num">2</span><span class="step-label">State &amp; Sovereignty</span></div>
+    <div class="prog-step" data-module="3"><span class="step-num">3</span><span class="step-label">Power &amp; Ideology</span></div>
+    <div class="prog-step" data-module="4"><span class="step-num">4</span><span class="step-label">Conflicts</span></div>
+    <div class="prog-step" data-module="5"><span class="step-num">5</span><span class="step-label">Global Actors</span></div>
+    <div class="prog-step" data-module="6"><span class="step-num">6</span><span class="step-label">Human Rights</span></div>
+    <div class="prog-step" data-module="7"><span class="step-num">7</span><span class="step-label">Development</span></div>
+    <div class="prog-step" data-module="8"><span class="step-num">8</span><span class="step-label">Expert Level</span></div>
+  </div>
+  <div class="overall-progress">
+    <div class="progress-bar-wrap"><div class="progress-bar" id="overallBar" style="width:0%"></div></div>
+    <span id="progressLabel">0% Complete</span>
+  </div>
+</section>
+
+<section class="modules-grid">
+  <h2>All Modules</h2>
+  <div class="grid">
+    <a href="modules/m1-foundations.html" class="module-card beginner">
+      <div class="card-icon">📚</div>
+      <div class="card-level">BEGINNER</div>
+      <h3>Module 1: Foundations</h3>
+      <p>What is politics? Key concepts, fag begreber, research methods. The building blocks of political science.</p>
+      <div class="card-topics"><span>Power</span><span>Sovereignty</span><span>Legitimacy</span><span>Methods</span></div>
+    </a>
+    <a href="modules/m2-state.html" class="module-card beginner">
+      <div class="card-icon">🏛️</div>
+      <div class="card-level">BEGINNER</div>
+      <h3>Module 2: State &amp; Sovereignty</h3>
+      <p>How states form, how governments work, political systems from democracy to authoritarianism.</p>
+      <div class="card-topics"><span>Democracy</span><span>Authoritarianism</span><span>Constitutions</span><span>UN</span></div>
+    </a>
+    <a href="modules/m3-power.html" class="module-card intermediate">
+      <div class="card-icon">⚡</div>
+      <div class="card-level">INTERMEDIATE</div>
+      <h3>Module 3: Power &amp; Ideology</h3>
+      <p>Hard vs soft power, political ideologies, left-right spectrum, nationalism, liberalism, realism.</p>
+      <div class="card-topics"><span>Hard Power</span><span>Soft Power</span><span>Realism</span><span>Liberalism</span></div>
+    </a>
+    <a href="modules/m4-conflicts.html" class="module-card intermediate">
+      <div class="card-icon">⚔️</div>
+      <div class="card-level">INTERMEDIATE</div>
+      <h3>Module 4: Global Conflicts</h3>
+      <p>All major ongoing conflicts 2024-2026: Ukraine, Gaza, Taiwan, Yemen, Sudan, Myanmar and more.</p>
+      <div class="card-topics"><span>Ukraine</span><span>Gaza</span><span>Taiwan</span><span>Yemen</span></div>
+    </a>
+    <a href="modules/m5-globalactors.html" class="module-card advanced">
+      <div class="card-icon">🌐</div>
+      <div class="card-level">ADVANCED</div>
+      <h3>Module 5: Global Actors</h3>
+      <p>USA, China, Russia, EU, India, Brazil - their power, foreign policy, and global influence in depth.</p>
+      <div class="card-topics"><span>USA</span><span>China</span><span>Russia</span><span>EU</span><span>India</span></div>
+    </a>
+    <a href="modules/m6-humanrights.html" class="module-card advanced">
+      <div class="card-icon">✊</div>
+      <div class="card-level">ADVANCED</div>
+      <h3>Module 6: Human Rights</h3>
+      <p>Universal Declaration, R2P, ICC, humanitarian interventions, genocide, war crimes.</p>
+      <div class="card-topics"><span>UDHR</span><span>ICC</span><span>R2P</span><span>Genocide</span></div>
+    </a>
+    <a href="modules/m7-development.html" class="module-card advanced">
+      <div class="card-icon">📈</div>
+      <div class="card-level">ADVANCED</div>
+      <h3>Module 7: Development &amp; Economics</h3>
+      <p>Global inequality, SDGs, World Bank, IMF, trade wars, sanctions and economic weaponization.</p>
+      <div class="card-topics"><span>SDGs</span><span>IMF</span><span>Trade</span><span>Inequality</span></div>
+    </a>
+    <a href="modules/m8-expert.html" class="module-card expert">
+      <div class="card-icon">🎓</div>
+      <div class="card-level">EXPERT</div>
+      <h3>Module 8: Expert Analysis</h3>
+      <p>Geopolitical theories, future scenarios, multipolar world, climate geopolitics, AI &amp; warfare.</p>
+      <div class="card-topics"><span>Multipolarity</span><span>Climate</span><span>AI War</span><span>Future</span></div>
+    </a>
+  </div>
+</section>
+
+<section class="quickstats">
+  <h2>Global Snapshot 2026</h2>
+  <div class="stats-row">
+    <div class="stat-card">
+      <canvas id="gdpChart"></canvas>
+      <p>GDP Share of Global Powers (%)</p>
+    </div>
+    <div class="stat-card">
+      <canvas id="conflictChart"></canvas>
+      <p>Active Conflicts by Region 2026</p>
+    </div>
+    <div class="stat-card">
+      <canvas id="democracyChart"></canvas>
+      <p>World Democracy Index 2025</p>
+    </div>
+  </div>
+</section>
+
+<section class="flashcard-preview">
+  <h2>Quick Concept: Fag Begreber</h2>
+  <div class="flashcard-deck" id="homeDeck">
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="fc-front">SUVERÆNITET<br><small>Click to flip</small></div>
+      <div class="fc-back">A state's supreme authority over its territory and people, free from external interference. (Westphalian principle, 1648)</div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="fc-front">LEGITIMITET<br><small>Click to flip</small></div>
+      <div class="fc-back">The perceived rightfulness of a government's authority. Max Weber: Traditional, Charismatic, Legal-Rational.</div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="fc-front">GEOPOLITIK<br><small>Click to flip</small></div>
+      <div class="fc-back">How geography (location, resources, terrain) shapes a state's political power and foreign policy decisions.</div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="fc-front">MAGT<br><small>Click to flip</small></div>
+      <div class="fc-back">Power: the ability to influence others. Hard power = military/economic coercion. Soft power = cultural attraction (Nye).</div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="fc-front">STAT<br><small>Click to flip</small></div>
+      <div class="fc-back">A political entity with: defined territory, permanent population, effective government, capacity for foreign relations (Montevideo 1933).</div>
+    </div>
+  </div>
+  <div class="fc-nav">
+    <button onclick="prevCard()">&#8592; Prev</button>
+    <span id="fcCounter">1 / 5</span>
+    <button onclick="nextCard()">Next &#8594;</button>
+  </div>
+</section>
+
+<section class="games-preview">
+  <h2>Interactive Learning Games</h2>
+  <div class="games-grid">
+    <a href="games/quiz.html" class="game-card">
+      <div class="game-icon">🧠</div>
+      <h3>Geopolitics Quiz</h3>
+      <p>Test your knowledge with 100+ questions across all modules. Track your high score!</p>
+      <span class="game-btn">Play Quiz</span>
+    </a>
+    <a href="games/map-game.html" class="game-card">
+      <div class="game-icon">🗺️</div>
+      <h3>Country Locator</h3>
+      <p>Identify countries, capitals, and regions on the interactive world map.</p>
+      <span class="game-btn">Play Map Game</span>
+    </a>
+    <a href="games/flashcards.html" class="game-card">
+      <div class="game-icon">🃏</div>
+      <h3>Flashcard Master</h3>
+      <p>All 200+ political terms and concepts with spaced repetition learning.</p>
+      <span class="game-btn">Study Cards</span>
+    </a>
+    <a href="games/timeline.html" class="game-card">
+      <div class="game-icon">📅</div>
+      <h3>History Timeline</h3>
+      <p>Interactive timeline from 1648 to 2026. Place events in the correct order!</p>
+      <span class="game-btn">Explore Timeline</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-content">
+    <p>GeoPolIB &mdash; Interactive IB Politics Platform</p>
+    <p>Data sources: World Bank, Freedom House, SIPRI, UN, Our World in Data &mdash; Updated 2026</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="modules/m1-foundations.html">Start Module 1</a>
+      <a href="games/quiz.html">Take a Quiz</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/charts.js"></script>
+</body>
+</html>
