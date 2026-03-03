@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Geopolitical Map - GeoPolIB</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map { height: 600px; width: 100%; border-radius: 8px; margin-top: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .map-info { padding: 20px; background: #1e293b; color: white; border-radius: 8px; margin-top: 20px; border-left: 4px solid #3b82f6; }
+        #country-data h4 { color: #3b82f6; margin-bottom: 10px; }
+        .legend { padding: 10px; background: rgba(30, 41, 59, 0.9); line-height: 18px; color: white; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">🌍 GeoPolIB</div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../modules/m1-foundations.html">M1</a></li>
+                <li><a href="../modules/m2-state.html">M2</a></li>
+                <li><a href="../modules/m3-power.html">M3</a></li>
+                <li><a href="../modules/m4-conflicts.html">M4</a></li>
+                <li><a href="../modules/m5-globalactors.html">M5</a></li>
+                <li><a href="../modules/m6-humanrights.html">M6</a></li>
+                <li><a href="../modules/m7-development.html">M7</a></li>
+                <li><a href="../modules/m8-expert.html">M8</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content-wrapper">
+        <section class="module-header">
+            <h1>Interactive Geopolitical Map</h1>
+            <p class="subtitle">🗺️ Explore Global Power Dynamics and Alliances</p>
+        </section>
+
+        <div id="map"></div>
+
+        <div class="map-info">
+            <h3>Geopolitical Analysis Tool</h3>
+            <div id="country-data">
+                <p>Click on the markers to see key geopolitical data for major actors and alliances.</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([20, 0], 2);
+        
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        }).addTo(map);
+
+        const geopoliticalActors = [
+            { 
+                name: "United States (NATO)", 
+                coords: [37.0902, -95.7129], 
+                data: "<b>Status:</b> Global Superpower (Realist Hegemon)<br><b>Key Alliance:</b> NATO leader<br><b>Focus:</b> Liberal International Order, Maritime Security." 
+            },
+            { 
+                name: "China (BRICS+)", 
+                coords: [35.8617, 104.1954], 
+                data: "<b>Status:</b> Emerging Superpower<br><b>Strategy:</b> Belt and Road Initiative, South China Sea claims.<br><b>Focus:</b> Economic development, state sovereignty." 
+            },
+            { 
+                name: "European Union", 
+                coords: [50.8503, 4.3517], 
+                data: "<b>Status:</b> Supranational Power<br><b>Focus:</b> Integration, Human Rights, Climate Governance.<br><b>Key Actor:</b> Germany/France leadership." 
+            },
+            { 
+                name: "Russia", 
+                coords: [61.5240, 105.3188], 
+                data: "<b>Status:</b> Regional Power (Eurasianist)<br><b>Conflict:</b> Ukraine War, Arctic sovereignty.<br><b>Focus:</b> Multi-polar world order." 
+            },
+            { 
+                name: "India (Global South)", 
+                coords: [20.5937, 78.9629], 
+                data: "<b>Status:</b> Rising Democracy<br><b>Role:</b> Leader of Global South, BRICS member.<br><b>Focus:</b> Strategic autonomy, non-alignment." 
+            },
+            { 
+                name: "African Union", 
+                coords: [9.145, 40.4897], 
+                data: "<b>Status:</b> Regional Integration<br><b>Focus:</b> Development (Agenda 2063), Conflict resolution, Post-colonial sovereignty." 
+            }
+        ];
+
+        geopoliticalActors.forEach(actor => {
+            const marker = L.circleMarker(actor.coords, {
+                radius: 10,
+                fillColor: "#3b82f6",
+                color: "#fff",
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.8
+            }).addTo(map);
+
+            marker.bindPopup(`<b>${actor.name}</b>`);
+            
+            marker.on('click', () => {
+                document.getElementById('country-data').innerHTML = `
+                    <h4>${actor.name}</h4>
+                    <p>${actor.data}</p>
+                    <button class="btn small" onclick="window.location.href='../modules/m5-globalactors.html'">Learn more in M5</button>
+                `;
+            });
+        });
+    </script>
+</body>
+</html>
