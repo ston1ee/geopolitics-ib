@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoPolIB Quiz</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .quiz-container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .question-card { background: #1e293b; border-radius: 12px; padding: 30px; margin: 20px 0; border-left: 4px solid #3b82f6; }
+        .question-num { color: #3b82f6; font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; }
+        .question-text { font-size: 1.2rem; color: #f1f5f9; margin-bottom: 20px; }
+        .options { display: grid; gap: 10px; }
+        .option-btn { background: #0f172a; border: 1px solid #334155; color: #f1f5f9; padding: 12px 18px; border-radius: 8px; cursor: pointer; text-align: left; transition: all 0.2s; }
+        .option-btn:hover { border-color: #3b82f6; background: #1e3a5f; }
+        .option-btn.correct { background: #166534; border-color: #22c55e; }
+        .option-btn.incorrect { background: #7f1d1d; border-color: #ef4444; }
+        .option-btn:disabled { cursor: default; }
+        .score-card { background: #1e293b; border-radius: 12px; padding: 40px; text-align: center; display: none; }
+        .score-num { font-size: 4rem; font-weight: bold; color: #3b82f6; }
+        #next-btn { background: #3b82f6; color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; margin-top: 15px; font-size: 1rem; display: none; }
+        #next-btn:hover { background: #2563eb; }
+        .progress-bar { background: #1e293b; border-radius: 50px; height: 8px; margin: 10px 0 20px; }
+        .progress-fill { background: #3b82f6; height: 8px; border-radius: 50px; transition: width 0.3s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">🌍 GeoPolIB</div>
+        <nav><ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="map-game.html">Map Game</a></li>
+        </ul></nav>
+    </header>
+
+    <main class="content-wrapper">
+        <section class="module-header">
+            <h1>IB Geopolitics Quiz</h1>
+            <p class="subtitle">🧠 Test your knowledge across all 8 modules</p>
+        </section>
+
+        <div class="quiz-container">
+            <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+            <div id="quiz-area"></div>
+            <button id="next-btn" onclick="nextQuestion()">Next Question &rarr;</button>
+            <div class="score-card" id="score-card">
+                <div class="score-num" id="final-score"></div>
+                <p id="score-msg"></p>
+                <button class="btn" onclick="restartQuiz()">Try Again</button>
+                <a href="map-game.html" class="btn" style="margin-left:10px">Explore Map</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const questions = [
+            { q: "What are the three traditional attributes of a sovereign state?", options: ["Territory, Population, Government", "Army, Economy, Culture", "Parliament, Courts, Police", "Flag, Anthem, Currency"], answer: 0, module: "M2" },
+            { q: "Which theory argues that states are the primary actors in a world of anarchy?", options: ["Liberalism", "Constructivism", "Realism", "Marxism"], answer: 2, module: "M1" },
+            { q: "The UN Security Council has how many permanent members?", options: ["3", "5", "7", "10"], answer: 1, module: "M5" },
+            { q: "Hard power primarily involves:", options: ["Cultural influence", "Diplomatic negotiations", "Military and economic coercion", "Media and propaganda"], answer: 2, module: "M3" },
+            { q: "The Universal Declaration of Human Rights was adopted in:", options: ["1919", "1945", "1948", "1966"], answer: 2, module: "M6" },
+            { q: "R2P (Responsibility to Protect) doctrine says states may intervene if:", options: ["Trade is threatened", "A government fails to protect its citizens from mass atrocities", "An ally requests help", "A border is violated"], answer: 1, module: "M6" },
+            { q: "The Human Development Index (HDI) measures:", options: ["GDP only", "Military strength", "Life expectancy, education, and income", "Democracy levels"], answer: 2, module: "M7" },
+            { q: "What best describes 'soft power'?", options: ["Nuclear deterrence", "Economic sanctions", "Attracting others through culture, values, and diplomacy", "Military alliances"], answer: 2, module: "M3" },
+            { q: "The Cold War was primarily a conflict between:", options: ["USA vs China", "USA vs USSR", "Europe vs Asia", "NATO vs UN"], answer: 1, module: "M4" },
+            { q: "Non-Governmental Organizations (NGOs) are best described as:", options: ["State agencies", "UN departments", "Independent organizations not run by governments", "Military alliances"], answer: 2, module: "M5" }
+        ];
+
+        let current = 0, score = 0, answered = false;
+
+        function showQuestion() {
+            if (current >= questions.length) { showScore(); return; }
+            const q = questions[current];
+            document.getElementById('progress').style.width = ((current / questions.length) * 100) + '%';
+            document.getElementById('quiz-area').innerHTML = `
+                <div class="question-card">
+                    <div class="question-num">Question ${current + 1} / ${questions.length} &bull; ${q.module}</div>
+                    <div class="question-text">${q.q}</div>
+                    <div class="options">${q.options.map((opt, i) => `<button class="option-btn" onclick="selectAnswer(${i}, this)">${opt}</button>`).join('')}</div>
+                </div>`;
+            document.getElementById('next-btn').style.display = 'none';
+            answered = false;
+        }
+
+        function selectAnswer(idx, btn) {
+            if (answered) return;
+            answered = true;
+            const q = questions[current];
+            document.querySelectorAll('.option-btn').forEach((b, i) => {
+                b.disabled = true;
+                if (i === q.answer) b.classList.add('correct');
+            });
+            if (idx === q.answer) { score++; } 
+            else { btn.classList.add('incorrect'); }
+            document.getElementById('next-btn').style.display = 'inline-block';
+        }
+
+        function nextQuestion() { current++; showQuestion(); }
+
+        function showScore() {
+            document.getElementById('quiz-area').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('score-card').style.display = 'block';
+            document.getElementById('progress').style.width = '100%';
+            const pct = Math.round((score / questions.length) * 100);
+            document.getElementById('final-score').textContent = score + '/' + questions.length;
+            const msgs = ["Keep studying!", "Getting there!", "Good effort!", "Well done!", "Excellent!", "Outstanding! IB Expert!"];
+            document.getElementById('score-msg').textContent = msgs[Math.floor(pct / 20)] + ' (' + pct + '%)';
+        }
+
+        function restartQuiz() {
+            current = 0; score = 0;
+            document.getElementById('quiz-area').style.display = 'block';
+            document.getElementById('score-card').style.display = 'none';
+            showQuestion();
+        }
+
+        showQuestion();
+    </script>
+</body>
+</html>
